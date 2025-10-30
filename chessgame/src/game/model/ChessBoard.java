@@ -1,4 +1,4 @@
-package game;
+package game.model;
 
 //TODO: Add it's not your're turn exceptions
 public class ChessBoard {
@@ -51,7 +51,7 @@ public class ChessBoard {
     public void movePiece(Position start, Position end) throws InvalidMoveException {
         //Check if piece exists at starting position
         if (board[start.getRow()][start.getColumn()] == null) {
-            throw new InvalidMoveException(ErrorMessages.NO_PIECE);
+            throw new InvalidMoveException(game.model.NO_PIECE);
         }
         //Check if destination is empty 
         else if (board[start.getRow()][start.getColumn()].isValidMove(end, board)){
@@ -73,7 +73,7 @@ public class ChessBoard {
         }
         //Exception for unavailable space
         else {
-            throw new InvalidMoveException(ErrorMessages.SPACE_FULL);
+            throw new InvalidMoveException(game.model.SPACE_FULL);
         }
     
  }

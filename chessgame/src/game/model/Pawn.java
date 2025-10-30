@@ -1,4 +1,4 @@
-package game;
+package game.model;
 
 public class Pawn extends Piece {
     public Pawn(PieceColor color, Position position) {
