@@ -1,4 +1,16 @@
-package game;
+package game.model;
+
+/**
+ * Represents pawn piece
+ * Validates 2 square first move
+ * Checks if forward space is available
+ * Validates forward-diagonal capture
+ * @see Piece
+ * @see Position    
+ * 
+ */
+
+ //TODO: Add castling function to create new instance of desired piece
 
 /**
  * Represents pawn piece

@@ -1,4 +1,4 @@
-package game;
+package game.model;
 
 /**
  * Abstract class representing a chess piece.
@@ -14,10 +14,12 @@ package game;
 public abstract class Piece {
     protected Position position;
     protected PieceColor color;
+    protected String name;
 
-    public Piece(Position position, PieceColor color) {
+    public Piece(Position position, PieceColor color, String name) {
         this.position = position;
         this.color = color;
+        this.name = name;
     }
 
     public Position getPosition() {
@@ -29,6 +31,14 @@ public abstract class Piece {
 
     public PieceColor getColor() {
         return color;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     // Abstract method required to be implemented to validate moves for each piece

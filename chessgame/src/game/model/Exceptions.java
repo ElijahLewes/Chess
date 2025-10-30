@@ -1,4 +1,4 @@
-package game;
+package game.model;
 class ErrorMessages {
     public static final String SPACE_FULL = "There is already a piece there. Try again.";
     public static final String SAME_POSITION = "The starting and ending positions are the same.";

@@ -1,4 +1,4 @@
-package game;
+package game.model;
 
 //TODO: Add it's not your're turn exceptions
 //TODO: Additional valid move for checkmate check
@@ -52,6 +52,9 @@ public class ChessBoard {
     public void movePiece(Position start, Position end) throws InvalidMoveException {
         //Check if piece exists at starting position
         if (board[start.getRow()][start.getColumn()] == null) {
+<<<<<<< HEAD:chessgame/src/game/model/ChessBoard.java
+            throw new InvalidMoveException(game.model.NO_PIECE);
+=======
             throw new InvalidMoveException(ErrorMessages.NO_PIECE);
         } else if (start.equals(end)) {
             throw new InvalidMoveException(ErrorMessages.SAME_POSITION);
@@ -76,7 +79,7 @@ public class ChessBoard {
         }
         //Exception for unavailable space
         else {
-            throw new InvalidMoveException(ErrorMessages.SPACE_FULL);
+            throw new InvalidMoveException(game.model.SPACE_FULL);
         }
     
  }
