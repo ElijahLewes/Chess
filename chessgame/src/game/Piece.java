@@ -1,5 +1,16 @@
 package game;
 
+/**
+ * Abstract class representing a chess piece.
+ * Each piece has a position and a color, and must implement the isValidMove method to validate its moves.
+ * @see Position
+ * @see PieceColor
+ * @see Board
+ * @see Move
+ * @see Player
+ * @see Game
+ */
+
 public abstract class Piece {
     protected Position position;
     protected PieceColor color;
