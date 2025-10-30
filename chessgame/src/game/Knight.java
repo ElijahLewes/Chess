@@ -1,5 +1,11 @@
 package game;
 
+/**
+ * Represents a knight chess piece.
+ * Validates for L-shaped move pattern
+ * Verifies potential capture as opponent's piece
+ * @see p
+ */
 
 public class Knight extends Piece {
     public Knight(PieceColor color, Position position) {

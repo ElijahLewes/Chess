@@ -1,5 +1,17 @@
 package game;
 
+/**
+ * Represents pawn piece
+ * Validates 2 square first move
+ * Checks if forward space is available
+ * Validates forward-diagonal capture
+ * @see Piece
+ * @see Position    
+ * 
+ */
+
+ //TODO: Add castling function to create new instance of desired piece
+
 public class Pawn extends Piece {
     public Pawn(PieceColor color, Position position) {
         super(color, position);

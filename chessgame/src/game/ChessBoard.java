@@ -1,6 +1,7 @@
 package game;
 
 //TODO: Add it's not your're turn exceptions
+//TODO: Additional valid move for checkmate check
 public class ChessBoard {
     private Piece[][] board;
     private int whiteCounter;
@@ -52,6 +53,8 @@ public class ChessBoard {
         //Check if piece exists at starting position
         if (board[start.getRow()][start.getColumn()] == null) {
             throw new InvalidMoveException(ErrorMessages.NO_PIECE);
+        } else if (start.equals(end)) {
+            throw new InvalidMoveException(ErrorMessages.SAME_POSITION);
         }
         //Check if destination is empty 
         else if (board[start.getRow()][start.getColumn()].isValidMove(end, board)){
