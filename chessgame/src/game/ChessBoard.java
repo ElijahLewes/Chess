@@ -1,10 +1,15 @@
 package game;
 
+//TODO: Add it's not your're turn exceptions
 public class ChessBoard {
     private Piece[][] board;
+    private int whiteCounter;
+    private int blackCounter;
 
     public ChessBoard() {
        this.board = new Piece[8][8];
+       this.whiteCounter = 0;
+       this.blackCounter = 0;
         // Initialize pieces on the board
         startingPieces();
     }
@@ -58,6 +63,13 @@ public class ChessBoard {
 
             //Clear starting position for next move
             board[start.getRow()][start.getColumn()] = null;
+            if (board[end.getRow()][end.getColumn()].getColor() == PieceColor.WHITE) {
+                whiteCounter++;
+                System.out.println("White has moved " + whiteCounter + " times. It's Black's turn.");
+            } else {
+                blackCounter++;
+                System.out.println("Black has moved " + blackCounter + " times. It's White's turn.");
+            }
         }
         //Exception for unavailable space
         else {
