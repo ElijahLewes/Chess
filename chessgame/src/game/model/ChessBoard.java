@@ -58,7 +58,6 @@ public class ChessBoard {
             throw new InvalidMoveException(ErrorMessages.NO_PIECE);
         } else if (start.equals(end)) {
             throw new InvalidMoveException(ErrorMessages.SAME_POSITION);
->>>>>>> main:chessgame/src/game/ChessBoard.java
         }
         //Check if destination is empty 
         else if (board[start.getRow()][start.getColumn()].isValidMove(end, board)){
