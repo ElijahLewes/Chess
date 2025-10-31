@@ -11,7 +11,7 @@ public class King extends Piece {
         int colDiff = Math.abs(newPosition.getColumn() - this.position.getColumn());
 
         // King can move one square in any direction
-
+       
         if (rowDiff <= 1 && colDiff <= 1){
             return true;
         }
