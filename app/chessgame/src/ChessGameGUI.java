@@ -1,9 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.MouseAdapter;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.HashMap;
+import java.util.HashMap;
 import java.util.Map;
+
+// Import all classes from game.model package
+import game.model.*;
 
 
 /**
@@ -62,26 +65,48 @@ public class ChessGameGUI extends JFrame{
 
     }   
 
+    /** Refresh the board display. Iterates through each square, updating the board based on state of position.
+     * @return void
+     * @calls getBoard() from ChessGame to get current state of the board
+     * @calls getPieceAt() from ChessBoard to get piece at specific position
+     * @calls setPieceSymbol() from ChessSquareComponent to update the square display
+     * @calls clearPieceSymbol() from ChessSquareComponent to clear the square display
+     * TODO: implement ChessSquareComponent class?
+    */
+
     private void refreshBoard(){
         ChessBoard board = game.getBoard();
         for (int row = 0; row < 8; row++)
         {
             for (int col = 0; col < 8; col++){
-                Piece piece = board.getPieceAt(row, col);
+                Piece piece = board.getPieceAt(row, col); 
                if (piece != null){
-                //If using Unicode icons
+                //Get the Unicode symbol for the piece
                 String symbol = pieceUnicodeMap.get(piece.getClass());
                 Color color = (piece.getColor() == PieceColor.WHITE) ? Color.WHITE : Color.BLACK;
                 squares[row][col].setPieceSymbol(symbol, color);
                } else {
                 squares[row][col].clearPieceSymbol();
+                /** If I end up using other icons changes implemented here */
                }
             }
         }
 
 }
 
+/** Gets user input and connects it to game logic. Click could be to select a piece or move a piece. Updates board if move is valid.
+ * Refers to ChessGame for game logic.
+ * @param row The row index of the clicked square
+ * @param col The column index of the clicked square
+ * @return void 
+ * @calls ChessGame.handleSquareClick() */
+
     private void handleSquareClick(int row, int col){
+        if (game.handleSquareSelection(row, col)) {
+            refreshBoard();
+            checkGameState();
+        
+        }
 
     }
 
