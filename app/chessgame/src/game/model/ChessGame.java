@@ -15,7 +15,6 @@ public class ChessGame {
 
 
 
-
 //MAKING MOVES ------------------------
     /**
      * Make a move on the chessboard.   
@@ -43,19 +42,20 @@ public class ChessGame {
             }
         }
 
+        return false;
+
     } 
 
     /**
      * Check if a position is within the bounds of the chessboard   
      * 
      * @param position
-     * @return
+     * if (mouseClicked on a square) { @return
      */
     private boolean isPositionValid(Position position) {
         return position.getRow() >= 0 && position.getRow() < board.getBoard().length &&
                position.getColumn() >= 0 && position.getColumn() < board.getBoard()[0].length;
     }
-
 
     /**
      * Check if moving a piece would put its own king in check
@@ -150,11 +150,9 @@ public class ChessGame {
             for (int colOffset = -1; colOffset <= 1; colOffset++) {
                 // Skip the current position
                 if (rowOffset == 0 && colOffset == 0) {
-                    continue;
-                }
                 Position newPosition = new Position(kingPosition.getRow() + rowOffset, kingPosition.getColumn() + colOffset);
                 // Check if the new position is within bounds
-                if (newPosition.isPositionValid()) {
+                if (isPositionValid(newPosition)) {
                     // Temporarily move the king
                     board.movePiece(kingPosition, newPosition);
                     // Check if the king is in check
@@ -166,16 +164,49 @@ public class ChessGame {
                     board.movePiece(newPosition, kingPosition);
                 
                 }
+                
+                }
             }
         } return true; // No valid moves to escape check, so it's checkmate
 
     }
 
+private Position selectPosition; // To track selected position for moves
+
+public boolean isPieceSelected() {
+    return selectPosition != null;
+}
 
 
-//GETTERS AND SETTERS ------------------------
-    public Piece[][] getBoard() {
-        return board;
+/**
+ *  Handles square selection and piece movement logic   
+ * @param row
+ * @param col
+ * @return boolean indicating if a move was made or moveMade
+ * @calls getPiece() from ChessBoard to get piece at specific position
+ * @calls makeMove() from ChessGame to attempt to make the move
+ * @calls isPieceSelected() from ChessGame to check if a piece is selected
+ */
+public boolean handleSquareSelection(int row, int col) {
+    if (selectedPosition == null) {
+        Piece slectedPiece = board.getPiece(row, col);
+        if (selectedPiece != null && selectedPiece.getColor() == (whiteTurn ? PieceColor.WHITE : PieceColor.BLACK)) {
+            // Piece selected, waiting for destination
+            selectedPosition = new Position(row, col);
+            return false; 
+        } else {
+            //move selected piece to destination
+            boolean moveMade = makeMove(selectedPosition, new Position (row, col));
+            selectedPosition = null; // Clear selection after move attempt
+            return moveMade;
+        }
+        return false; // No piece selected and no move made
+    }
+
+
+
+    public Piece[][] getBoardArray() {
+        return board.getBoard();
     }
 
     public Piece getPiece(int row, int column) {
@@ -183,11 +214,31 @@ public class ChessGame {
     }   
 
     public void setPiece(int row, int column, Piece piece) {
-        board[row][column] = piece;
+        board.setPiece(row, column, piece);
         if (piece != null) {
             piece.setPosition(new Position(row, column));
         }
     }
+
+    /** getBoard provides access to current board state for the GUI
+     * @return ChessBoard object representing current game state
+     */
+    public ChessBoard getBoard() {
+        return this.board;
+    }
+
+/** resetGame resets the game to the initial state
+     */
+    public void resetGame() {
+        this.board = new ChessBoard();
+        this.whiteTurn = true;
+    }
+    /** modular way to access current player color */
+    public PieceColor getCurrentPlayer() {
+        return whiteTurn ? PieceColor.WHITE : PieceColor.BLACK;
+    }
+
+
 
 
 

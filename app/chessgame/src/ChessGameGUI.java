@@ -99,7 +99,9 @@ public class ChessGameGUI extends JFrame{
  * @param row The row index of the clicked square
  * @param col The column index of the clicked square
  * @return void 
- * @calls ChessGame.handleSquareClick() */
+ * @calls ChessGame.handleSquareClick() 
+ * 
+ * @TODO: handleSquareSelection() needs to be created or verified in ChessGame class. Did he just call it something else? Who knows. It SHOULD select or move a piece based on click*/
 
     private void handleSquareClick(int row, int col){
         if (game.handleSquareSelection(row, col)) {
@@ -109,11 +111,30 @@ public class ChessGameGUI extends JFrame{
         }
 
     }
+    /** Check and update the game state after each move.
+     * Alerts players if they are in check, checkmate, or stalemate.
+     * @return void
+     * @calls isInCheck() from ChessGame to determine if current player is in check
+     * @calls isCheckmate() from ChessGame to determine if current player is in checkmate
+     * @calls isStalemate() from ChessGame to determine if current player is in stalemate
+     * 
+     */
 
+    //TODO: Check checkmate and stalemate conditions -- is this redundant with ChessGame methods??
     private void checkGameState() {
+        //Should return current player's color
+        PieceColor currentPlayer = game.getCurrentPlayer();
+        boolean inCheck = game.isInCheck(currentPlayer);
+        if (inCheck) {
+            JOptionPane.showMessageDialog(this, currentPlayer + " is in check!");
+        } else if (game.isCheckmate(currentPlayer)) {
+            // Handle checkmate scenario
+            JOptionPane.showMessageDialog(this, currentPlayer + " is in checkmate! Game over.");
+        }
 
     }
     
+/** Main method to launch the chess game GUI */
 public static void main(String[] args) {
     SwingUtilities.invokeLater(ChessGameGUI::new);
     }
